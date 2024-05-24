@@ -20,7 +20,6 @@ class ViewController: UIViewController, UIContextMenuInteractionDelegate {
     }
     
     func contextMenuInteraction(_ interaction: UIContextMenuInteraction, configurationForMenuAtLocation location: CGPoint) -> UIContextMenuConfiguration? {
-        // set_internalSecondaryItemIdentifiers:
         
         let identifier: String?
         let secondaryItemIdentifiers: [String]
@@ -56,6 +55,20 @@ class ViewController: UIViewController, UIContextMenuInteractionDelegate {
     }
     
     func contextMenuInteraction(_ interaction: UIContextMenuInteraction, configuration: UIContextMenuConfiguration, highlightPreviewForItemWithIdentifier identifier: any NSCopying) -> UITargetedPreview? {
+        guard let identifier: String = identifier as? String else { return nil }
+        
+        if identifier == "1" {
+            return .init(view: pinkView)
+        } else if identifier == "2" {
+            return .init(view: cyanView)
+        } else if identifier == "3" {
+            return .init(view: greenView)
+        } else {
+            return nil
+        }
+    }
+    
+    func contextMenuInteraction(_ interaction: UIContextMenuInteraction, configuration: UIContextMenuConfiguration, dismissalPreviewForItemWithIdentifier identifier: any NSCopying) -> UITargetedPreview? {
         guard let identifier: String = identifier as? String else { return nil }
         
         if identifier == "1" {
